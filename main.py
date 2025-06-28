@@ -13,7 +13,7 @@ class Name(Field):
         super().__init__(value)
         if len(self.value) > 0:
              return
-        raise ValueError('The info is not correct. Please provide correct phone number')
+        raise ValueError('The info is not correct. Name must not be blank')
 
 class Phone(Field):
     # реалізація класу
@@ -30,18 +30,18 @@ class Record:
         self.phones = []
 
     # реалізація класу
-    def add_phone(self, phone):
+    def add_phone(self, phone:str):
         """add phone to self.phones"""
         self.phones.append(Phone(phone))
     
-    def remove_phone(self, phone):
+    def remove_phone(self, phone:str):
         for obj_phone in self.phones:
             if obj_phone.value == phone:
                 self.phones.remove(obj_phone)
                 return
         raise ValueError('Number not found') 
     
-    def edit_phone(self, old_phone, new_phone):
+    def edit_phone(self, old_phone:str, new_phone:str):
         # for obj_phone in self.phones:
         #     if obj_phone.value == old_phone:
         #         obj_phone.value = new_phone
@@ -53,7 +53,7 @@ class Record:
             
         raise ValueError('Number not found')
             
-    def find_phone(self, phone):
+    def find_phone(self, phone:str):
         for obj_phone in self.phones:
             if obj_phone.value == phone:
                 return obj_phone
@@ -69,10 +69,10 @@ class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
     
-    def find(self, name):
+    def find(self, name:str):
         return self.data.get(name, None)
         
-    def delete(self, name):
+    def delete(self, name:str):
         self.data.pop(name)
             
     def __str__(self) -> str:
