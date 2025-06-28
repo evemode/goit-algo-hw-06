@@ -10,20 +10,17 @@ class Field:
 class Name(Field):
     # реалізація класу
     def __init__(self, value):
+        if not len(value) > 0:
+            raise ValueError('The info is not correct. Name must not be blank')
         super().__init__(value)
-        if len(self.value) > 0:
-             return
-        raise ValueError('The info is not correct. Name must not be blank')
-
+        
 class Phone(Field):
     # реалізація класу
-	def __init__(self, value):
-          super().__init__(value)
-          if self.value.isdigit() and len(self.value) == 10:
-              return
-          
-          raise ValueError('The info is not correct. Please provide correct phone number')
-
+    def __init__(self, value):
+        if not value.isdigit() and len(value) == 10:
+            raise ValueError('The info is not correct. Please provide correct phone number')
+        super().__init__(value)
+        
 class Record:
     def __init__(self, name):
         self.name = Name(name)
