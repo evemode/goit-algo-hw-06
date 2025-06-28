@@ -37,10 +37,15 @@ class Record:
         raise ValueError('Number not found') 
     
     def edit_phone(self, old_phone, new_phone):
+        # for obj_phone in self.phones:
+        #     if obj_phone.value == old_phone:
+        #         obj_phone = new_phone
+        #         return
         for i, obj_phone in enumerate(self.phones):
             if obj_phone.value == old_phone:
-                self.phones[i] = Phone(new_phone)
+                self.phones[i] = Phone(new_phone)  # создаем новый объект Phone
                 return
+            
         raise ValueError('Number not found')
             
     def find_phone(self, phone):
@@ -60,7 +65,7 @@ class AddressBook(UserDict):
         self.data[record.name.value] = record
     
     def find(self, name):
-        return self.data.get(name)
+        return self.data.get(name, None)
         
     def delete(self, name):
         self.data.pop(name)
@@ -101,17 +106,23 @@ book.add_record(jane_record)
 
 # Виведення всіх записів у книзі
     
-print(book)
+#print(book)
 
 # Знаходження та редагування телефону для John
 john = book.find("John")
-john.edit_phone("1234567890", "1112223333")
+# john.edit_phone("1234567890", "1112223333")
 
-print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
+# print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
 
-# Пошук конкретного телефону у записі John
+# # Пошук конкретного телефону у записі John
+# found_phone = john.find_phone("5555555555")
+# print(f"{john.name}: {found_phone}")  # Виведення: John: 5555555555
+
+# # Видалення запису Jane
+
+john.edit_phone("1234567890", '6666666666')
+print(john)
 found_phone = john.find_phone("5555555555")
-print(f"{john.name}: {found_phone}")  # Виведення: John: 5555555555
-
-# Видалення запису Jane
-book.delete("Jane")
+print(f"{john.name}: {found_phone}")
+#book.delete("Jane")
+print(book.find('Jane'))
